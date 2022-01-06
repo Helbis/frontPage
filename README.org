@@ -1,0 +1,13 @@
+#+TITLE: Readme
+#+LANGUAGE: en
+#+AUTHOR: Helbis
+#+DATE: <2022-01-06 czw>
+
+
+* Project definition
+Small website made for my personal needs:
++ check the weather,
++ go to the favorite websites,
++ see nice animation of the clock,
++ check some stock & crypto values
++ check favorite channels on the internet latest posts
