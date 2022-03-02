@@ -1,0 +1,23 @@
+main {
+    display: flex;
+    flex-basis: 15rem;
+    flex-wrap: wrap;
+    
+    width: 100%;
+}
+
+main > article {
+    min-width: 10rem;
+    width: 30%;
+    max-width: 25rem;
+    
+    margin: auto;
+    padding: 1rem;
+
+    border: 1px solid gray;
+}
+
+footer{
+    position: absolute;
+    bottom: 1rem;
+}

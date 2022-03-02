@@ -4,20 +4,21 @@
     <title>Main page</title>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="description" content="">
+    <meta name="description" content=
+    "Basic website connecting me to the important websites">
     <meta name="viewport" content=
     "width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
+    <!-- STYLES -->
+    <link rel="stylesheet" href="./root.css" type="text/css" media=
+    "screen">
 </head>
 <body>
-    <!--[if lt IE 8]>
-            <p class="browserupgrade">
-            You are using an <strong>outdated</strong> browser. Please
-            <a href="https://www.mozilla.org/en-US/firefox/browsers/compare/">upgrade your browser</a> to improve
-            your experience.
-            </p>
-        <![endif]-->
+    <noscript>
+    <h2>No JavaScript allowed</h2>
+    <p>Please allow JavaScript for some functionality and
+    interactions between this website and others.</p></noscript>
     <header>
         <nav>
             <ul>
@@ -26,16 +27,52 @@
         </nav>
     </header>
     <main>
+        <article class="clock">
+            <h2>Clock</h2>
+        </article>
         <article class="weather">
-            <p>weather</p>
+            <h2>Weather</h2>
         </article>
         <article class="stocks">
-            <p>stocks</p>
+            <h2>Stocks</h2>
         </article>
-        <article>
-            <p></p>
+        <article class="newsfeed">
+            <h2>Newsfeed</h2>
+        </article>
+        <article class="favPages">
+            <h2>Favorite pages</h2>
+            <ul>
+                <li>
+                    <a target="blank" href=
+                    "https://www.youtube.com/feed/subscriptions">youtube</a>
+                </li>
+                <li>
+                    <a target="blank" href=
+                    "https://mail.google.com/mail/u/0/#inbox">gmail</a>
+                </li>
+                <li>
+                    <a target="blank" href=
+                    "https://messenger.com">messenger</a>
+                </li>
+            </ul>
         </article>
     </main>
-    <footer></footer>
+    <hr>
+    <footer>
+        <details>
+            <summary>
+                Contact info
+            </summary>
+            <ul>
+                <li>
+                    <a href="mailto:filiphelbig97@gmail.com">EMAIL
+                    ME</a>
+                </li>
+                <li>
+                    <a href="https://github.com/Helbis">GITHUB</a>
+                </li>
+            </ul>
+        </details>
+    </footer>
 </body>
 </html>
