@@ -6,7 +6,7 @@ main {
     width: 100%;
 }
 
-main > article {
+main > div {
     min-width: 10rem;
     width: 30%;
     max-width: 25rem;
