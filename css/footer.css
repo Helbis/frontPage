@@ -1,5 +1,7 @@
 footer{
     height: 100%;
+    
+    margin: var(--gap-size);
 }
 
 footer > * {
