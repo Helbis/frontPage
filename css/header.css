@@ -1,0 +1,14 @@
+header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+  gap: var(--gap-size);
+  
+  height: 100%;
+  margin: var(--gap-size);
+}
+
+header > nav {
+  flex-basis: 12rem;
+}
