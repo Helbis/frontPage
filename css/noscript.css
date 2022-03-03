@@ -1,0 +1,6 @@
+noscript{
+    display: grid;
+    grid-template-rows: 1fr 11fr;
+
+    border: 5px solid blue;
+}
