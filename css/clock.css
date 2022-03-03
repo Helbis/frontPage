@@ -1,0 +1,19 @@
+.clock{
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    
+    
+    background-color: lightcoral;
+    min-width: var(--clock-size);
+    min-height: var(--clock-size);
+    aspect-ratio: 1 / 1;
+}
+
+.hourHand{
+    background: blue;
+    width: 100px;
+    height: 10px;
+    transform: translateX(50px);
+    transform: rotateZ(45deg)
+}
