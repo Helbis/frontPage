@@ -1,5 +1,6 @@
 noscript{
     display: grid;
+    align-items: center;
     grid-template-rows: 1fr 11fr;
 
     border: 5px solid blue;

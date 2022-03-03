@@ -3,12 +3,12 @@ main.flex{
     flex-wrap: wrap;
     gap: var(--gap-size);
     
-    height: 90%;
+    height: 95%;
 
     margin: var(--gap-size);
 }
 
-main.flex > div.flex-item {
+.flex-item {
     flex-basis: 15rem;
     flex-grow: 1;
     flex-shrink: 1;
@@ -18,10 +18,4 @@ main.flex > div.flex-item {
 
     border: 1px solid gray;
     border-radius: 5px;
-}
-
-
-main.flex > div.favPages {
-    flex-basis: 80%;
-    background: red;
 }
