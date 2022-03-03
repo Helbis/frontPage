@@ -1,3 +1,7 @@
+:root{
+    --gap-size: 1rem;
+}
+
 html,
 body{
     padding: 0;
