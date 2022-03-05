@@ -1,6 +1,13 @@
 :root{
     --gap-size: 1rem;
-    --clock-size: 100px;
+    
+    /* CLOCK SIZES */
+    --clock-size: 16rem;
+    --clock-hour-height: 10px
+    
+    /* COLORS */
+    --clr-light-background: lightgrey;
+    --clr-light-primary: lightblue;
 }
 
 html,

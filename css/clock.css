@@ -1,19 +1,41 @@
 .clock{
     display: grid;
     justify-content: center;
-    align-content: center;
-    
     
     background-color: lightcoral;
     min-width: var(--clock-size);
     min-height: var(--clock-size);
     aspect-ratio: 1 / 1;
+    
+    gap: var(--gap-size);
+    margin: 0;
+    padding: 0;
 }
+
+
+.clockFace{
+    background: darkblue;
+    width: var(--clock-size);
+    height: var(--clock-size);
+    
+    margin-top: 1rem;
+    padding: 0;
+    
+    border-radius: 50%;
+}
+
 
 .hourHand{
     background: blue;
-    width: 100px;
-    height: 10px;
-    transform: translateX(50px);
-    transform: rotateZ(45deg)
+    width: calc(var(--clock-size) / 4);
+    height: var(--clock-hour-height);
+    position: relative;
+    top: calc(50% - var(--clock-hour-height));
+/*     left: 50%; */
+    
+    margin: 0;
+    padding: 0;
+    
+/*     transform: rotate(45deg)  */
+/*     transform: translate(50px, 50px) rotate(60deg); */
 }
