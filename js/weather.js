@@ -1,3 +1,12 @@
+const aqiColors = [
+  [50, "green"],
+  [100, "yellow"],
+  [150, "orange"],
+  [200, "red"],
+  [300, "purple"],
+  [500, "maroon"]
+]
+
 let request = new XMLHttpRequest();
 
 // request.open("GET", "https://api.weatherapi.com/v1/current.json?key=4f683ab8a0994e838c4150136220503&q=Lodz&aqi=yes", true);
@@ -19,7 +28,7 @@ function changeTemp(newTemp){
     return;
   }
 
-  tempDiv.innerText = `${newTemp} deg`;
+  tempDiv.innerHTML = `${newTemp} <span id="tempDegree" class="symbol">&#8451;</span>`;
 }
 
 function changeHumidity(newHum){
@@ -31,11 +40,28 @@ function changeHumidity(newHum){
     return;
   }
 
-  humDiv.innerText = `${newHum} %`;
+  humDiv.innerHTML = `${newHum} <span id="humidityPercentage" class=
+                "symbol">%</span>`;
+}
+
+function changeAQIColor(newAQI){
+  const aqiColorDiv = document.getElementById("aqiColor");
+
+  if ( aqiColorDiv == null ){
+    /* Issue of loading script before HTML is fixed by using "defer" */
+    console.log("no AQI Color block");
+    return;
+  }
+
+  for (let i=0; i<aqiColors.length; i++) {
+    if ( aqiColors[i][0] <= newAQI ) {
+      aqiColorDiv.style.backgroundColor = aqiColors[i][1];
+    }
+  }
 }
 
 function changeAQI(newAQI){
-  const aqiDiv = document.getElementById("aqi");
+  const aqiDiv = document.getElementById("aqiValue");
 
   if ( aqiDiv == null ){
     /* Issue of loading script before HTML is fixed by using "defer" */
@@ -44,5 +70,15 @@ function changeAQI(newAQI){
   }
 
   aqiDiv.innerText = `${newAQI}`;
+
+  changeAQIColor(newAQI);
 }
 
+// changeTemp(20);
+
+console.log(aqiColors);
+
+function testAQI(){
+  const input = document.getElementById("slider");
+  console.log(input.getAttribute("value"));
+}

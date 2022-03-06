@@ -43,17 +43,27 @@
         <div class="weather flex-item">
             <h2>Weather in <span id="city">Lodz</span></h2>
             <div id="temperature">
-                10 deg
+                10 <span id="tempDegree" class="symbol">℃</span>
             </div>
             <div id="humidity">
-                50%
+                50 <span id="humidityPercentage" class=
+                "symbol">%</span>
             </div>
             <div id="aqi">
-                60
+                <span id="aqiValue">60</span>
+                <div id="aqiColor"></div><input type="range" id=
+                "slider" name="slider" placeholder="50" min="0"
+                max="500"> <button onclick="testAQI()">change
+                aqi</button>
             </div>
         </div>
         <div class="stocks flex-item">
-            <h2>Stocks</h2>
+            <div id="stocks">
+                <h2>Stocks</h2>
+            </div>
+            <div id="crypto">
+                <h2>Crypto</h2>
+            </div>
         </div>
         <div class="newsfeed flex-item">
             <h2>Newsfeed</h2>

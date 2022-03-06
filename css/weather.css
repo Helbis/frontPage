@@ -1,3 +1,23 @@
 div.weather{
     background-color: lightblue;
 }
+
+meter{
+    width: 100%;
+    background-image: linear-gradient(
+        to right,
+        green 0%,
+        yellow 10.20%,
+        orange 20.20%,
+        red 30.20%,
+        purple 40.20%,
+        maroon 60.20%
+    );
+    background-size: 100% 100%;
+}
+
+div#aqiColor{
+    width: 100%;
+    height: 4rem;
+    background-color: maroon;
+}
