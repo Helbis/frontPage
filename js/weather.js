@@ -74,11 +74,17 @@ function changeAQI(newAQI){
   changeAQIColor(newAQI);
 }
 
-// changeTemp(20);
-
-console.log(aqiColors);
-
 function testAQI(){
-  const input = document.getElementById("slider");
   console.log(input.getAttribute("value"));
 }
+
+
+/* Slider for changing the color manually
+ *  later it will be automatic, based on current weather data */
+const aqiDiv = document.getElementById("aqiValue");
+const input = document.getElementById("slider");
+
+input.oninput = function() {
+  aqiDiv.innerHTML = this.value;
+  changeAQIColor(this.value);
+};
