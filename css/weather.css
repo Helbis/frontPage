@@ -1,23 +1,35 @@
 div.weather{
     background-color: lightblue;
+/*     margin: 1rem; */
+/*     padding: 1rem; */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-meter{
-    width: 100%;
-    background-image: linear-gradient(
-        to right,
-        green 0%,
-        yellow 10.20%,
-        orange 20.20%,
-        red 30.20%,
-        purple 40.20%,
-        maroon 60.20%
-    );
-    background-size: 100% 100%;
+div.weather{
+/*     margin: 1rem; */
+    padding: 1rem
 }
 
 div#aqiColor{
     width: 100%;
     height: 4rem;
     background-color: maroon;
+}
+
+#aqi{
+    margin-top: auto;
+}
+
+#aqiValue {
+    color: maroon;
+    font-weight: bold;
+}
+
+.symbol, .value{
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 1rem;
 }

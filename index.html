@@ -43,18 +43,26 @@
         <div class="weather flex-item">
             <h2>Weather in <span id="city">Lodz</span></h2>
             <div id="temperature">
-                10 <span id="tempDegree" class="symbol">℃</span>
+                <span id="tempValue" class="value">10</span>
+                <span id="tempDegree" class="symbol">℃</span>
+            </div>
+            <div id="condition"><img src=
+            "//cdn.weatherapi.com/weather/64x64/day/113.png" alt=
+            "condition image"></div>
+            <div id="pressure">
+                <span id="pressureValue" class="value">50</span>
+                <span id="pressureUnit" class="symbol">hPa</span>
             </div>
             <div id="humidity">
-                50 <span id="humidityPercentage" class=
-                "symbol">%</span>
+                <span id="humidityValue" class=
+                "value">50</span><span id="humidityPercentage"
+                class="symbol">%</span> <progress id=
+                "progressHumidity" max="100" value="50"></progress>
             </div>
             <div id="aqi">
-                <span id="aqiValue">60</span>
-                <div id="aqiColor"></div><input type="range" id=
-                "slider" name="slider" min="0" max="500" value=
-                "50"> <button onclick="testAQI()">change
-                aqi</button>
+                <span id="aqiValue" class="value">100</span>
+                <input type="range" id="slider" name="slider" min=
+                "0" max="500" value="100">
             </div>
         </div>
         <div class="stocks flex-item">

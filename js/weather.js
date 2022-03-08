@@ -9,9 +9,9 @@ const aqiColors = [
 
 let request = new XMLHttpRequest();
 
-// request.open("GET", "https://api.weatherapi.com/v1/current.json?key=4f683ab8a0994e838c4150136220503&q=Lodz&aqi=yes", true);
-// request.responseType = "json";
-// request.send();
+request.open("GET", "https://api.weatherapi.com/v1/current.json?key=4f683ab8a0994e838c4150136220503&q=Lodz&aqi=yes", true);
+request.responseType = "json";
+request.send();
 
 request.onload = () => {
   console.log(request.response)
@@ -20,7 +20,7 @@ request.onload = () => {
 
 
 function changeTemp(newTemp){
-  const tempDiv = document.getElementById("temperature");
+  const tempDiv = document.getElementById("tempValue");
 
   if ( tempDiv == null ){
     /* Issue of loading script before HTML is fixed by using "defer" */
@@ -28,11 +28,12 @@ function changeTemp(newTemp){
     return;
   }
 
-  tempDiv.innerHTML = `${newTemp} <span id="tempDegree" class="symbol">&#8451;</span>`;
+  tempDiv.innerHTML = `${newTemp}`;
 }
 
 function changeHumidity(newHum){
-  const humDiv = document.getElementById("humidity");
+  const humDiv = document.getElementById("humidityValue");
+  const humidity = document.getElementById("progressHumidity");
 
   if ( humDiv == null ){
     /* Issue of loading script before HTML is fixed by using "defer" */
@@ -40,24 +41,8 @@ function changeHumidity(newHum){
     return;
   }
 
-  humDiv.innerHTML = `${newHum} <span id="humidityPercentage" class=
-                "symbol">%</span>`;
-}
-
-function changeAQIColor(newAQI){
-  const aqiColorDiv = document.getElementById("aqiColor");
-
-  if ( aqiColorDiv == null ){
-    /* Issue of loading script before HTML is fixed by using "defer" */
-    console.log("no AQI Color block");
-    return;
-  }
-
-  for (let i=0; i<aqiColors.length; i++) {
-    if ( aqiColors[i][0] <= newAQI ) {
-      aqiColorDiv.style.backgroundColor = aqiColors[i][1];
-    }
-  }
+  humidity.value = newHum;
+  humDiv.innerHTML = `${newHum}`;
 }
 
 function changeAQI(newAQI){
@@ -71,20 +56,19 @@ function changeAQI(newAQI){
 
   aqiDiv.innerText = `${newAQI}`;
 
-  changeAQIColor(newAQI);
-}
-
-function testAQI(){
-  console.log(input.getAttribute("value"));
+  /* Change color */
+  for (let i=0; i<aqiColors.length; i++) {
+    if ( aqiColors[i][0] <= newAQI ) {
+      aqiDiv.style.color = aqiColors[i][1];
+    }
+  }
 }
 
 
 /* Slider for changing the color manually
  *  later it will be automatic, based on current weather data */
-const aqiDiv = document.getElementById("aqiValue");
 const input = document.getElementById("slider");
 
 input.oninput = function() {
-  aqiDiv.innerHTML = this.value;
-  changeAQIColor(this.value);
+  changeAQI(this.value);
 };
