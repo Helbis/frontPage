@@ -25,8 +25,13 @@
     <link rel="stylesheet" href="./css/stocks.css" type="text/css"
     media="screen"><!--    JAVASCRIPT    -->
 
+    <script type="text/javascript" src=
+    "./data/json/weather_conditions.js" defer></script>
     <script type="text/javascript" src="./js/weather.js" defer
     ></script>
+    <script type="text/javascript" src=
+    "./js/functionDeclarations.js" defer></script>
+    <script type="text/javascript" src="./js/loadImg.js"></script>
 </head>
 <body>
     <noscript>
@@ -46,8 +51,8 @@
                 <span id="tempValue" class="value">10</span>
                 <span id="tempDegree" class="symbol">℃</span>
             </div>
-            <div id="condition"><img src=
-            "//cdn.weatherapi.com/weather/64x64/day/113.png" alt=
+            <div id="condition"><img id="weatherImg" src=
+            "images/weather/64x64/day/302.png" alt=
             "condition image"></div>
             <div id="pressure">
                 <span id="pressureValue" class="value">50</span>

@@ -1,3 +1,6 @@
+const weatherStates = JSON.parse(data);
+console.log(weatherStates);
+
 const aqiColors = [
   [50, "green"],
   [100, "yellow"],
@@ -5,64 +8,27 @@ const aqiColors = [
   [200, "red"],
   [300, "purple"],
   [500, "maroon"]
-]
+];
 
 let request = new XMLHttpRequest();
+let response;
 
-request.open("GET", "https://api.weatherapi.com/v1/current.json?key=4f683ab8a0994e838c4150136220503&q=Lodz&aqi=yes", true);
+request.open("GET", "https:api.weatherapi.com/v1/current.json?key=4f683ab8a0994e838c4150136220503&q=Lodz&aqi=yes", true);
 request.responseType = "json";
 request.send();
 
 request.onload = () => {
-  console.log(request.response)
+  console.log(request.response.current);
 
+  // changeAQI();
+  changeTemp(request.response.current.temp_c);
+  changePressure(request.response.current.pressure_mb);
+  changeHumidity(request.response.current.humidity);
+
+  updateWeatherImage(request.response.current.condition.code);
+
+  request.response;
 };
-
-
-function changeTemp(newTemp){
-  const tempDiv = document.getElementById("tempValue");
-
-  if ( tempDiv == null ){
-    /* Issue of loading script before HTML is fixed by using "defer" */
-    console.log("no temperature block");
-    return;
-  }
-
-  tempDiv.innerHTML = `${newTemp}`;
-}
-
-function changeHumidity(newHum){
-  const humDiv = document.getElementById("humidityValue");
-  const humidity = document.getElementById("progressHumidity");
-
-  if ( humDiv == null ){
-    /* Issue of loading script before HTML is fixed by using "defer" */
-    console.log("no humidity block");
-    return;
-  }
-
-  humidity.value = newHum;
-  humDiv.innerHTML = `${newHum}`;
-}
-
-function changeAQI(newAQI){
-  const aqiDiv = document.getElementById("aqiValue");
-
-  if ( aqiDiv == null ){
-    /* Issue of loading script before HTML is fixed by using "defer" */
-    console.log("no AQI block");
-    return;
-  }
-
-  aqiDiv.innerText = `${newAQI}`;
-
-  /* Change color */
-  for (let i=0; i<aqiColors.length; i++) {
-    if ( aqiColors[i][0] <= newAQI ) {
-      aqiDiv.style.color = aqiColors[i][1];
-    }
-  }
-}
 
 
 /* Slider for changing the color manually
