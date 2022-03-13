@@ -20,7 +20,7 @@ request.send();
 request.onload = () => {
   console.log(request.response.current);
 
-  // changeAQI();
+  changeAQI();
   changeTemp(request.response.current.temp_c);
   changePressure(request.response.current.pressure_mb);
   changeHumidity(request.response.current.humidity);
