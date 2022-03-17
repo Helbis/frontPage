@@ -3,7 +3,7 @@ function changeTemp(newTemp){
 
   if ( tempDiv == null ){
     /* Issue of loading script before HTML is fixed by using "defer" */
-    console.log("no temperature block");
+    console.error("no temperature block");
     return;
   }
 
@@ -16,7 +16,7 @@ function changeHumidity(newHum){
 
   if ( humDiv == null ){
     /* Issue of loading script before HTML is fixed by using "defer" */
-    console.log("no humidity block");
+    console.error("no humidity block");
     return;
   }
 
@@ -53,6 +53,23 @@ function convert2ppm(values){
   return result;
 }
 
+function compareHighAndLow(compareTo, compared, i){
+  let result = {
+    low   : 0,
+    high  : 0,
+    index : 0
+  };
+
+  if ( compareTo.low[i] < compared && compared < compareTo.high[i] ) {
+    result.low  = compareTo.low[i];
+    result.high = compareTo.high[i];
+    result.index = i;
+  }
+
+  console.table(result);
+  // return result;
+}
+
 function calculateAQI(aqiData) {
   /* Using formula from:
    * https://en.wikipedia.org/wiki/Air_quality_index#Computing_the_AQI
@@ -66,10 +83,7 @@ function calculateAQI(aqiData) {
     NO2 : 8.7
   };
 
-  /* Data for low and high indexes */
-  /*
-   *
-   *
+  /* Data for low and high indexes
 | Clow – Chigh (avg) | Clow – Chigh (avg) | Clow – Chigh (avg)  | Clow – Chigh (avg) | Clow – Chigh (avg) | Clow – Chigh (avg) | Clow – Chigh (avg) | Ilow – Ihigh | Category                       |
 | O3 (ppb)           | O3 (ppb)           | PM2.5 (μg/m3)       | PM10 (μg/m3)       | CO (ppm)           | SO2 (ppb)          | NO2 (ppb)          | AQI          | AQI                            |
 |:------------------:|:------------------:|:-------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------:|:------------------------------:|
@@ -80,7 +94,7 @@ function calculateAQI(aqiData) {
 | 106–200 (8-hr)     | 205–404 (1-hr)     | 150.5–250.4 (24-hr) | 355–424 (24-hr)    | 15.5–30.4 (8-hr)   | 305–604 (24-hr)    | 650–1249 (1-hr)    | 201–300      | Very Unhealthy                 |
 | —                  | 405–504 (1-hr)     | 250.5–350.4 (24-hr) | 425–504 (24-hr)    | 30.5–40.4 (8-hr)   | 605–804 (24-hr)    | 1250–1649 (1-hr)   | 301–400      | Hazardous                      |
 | —                  | 505–604 (1-hr)     | 350.5–500.4 (24-hr) | 505–604 (24-hr)    | 40.5–50.4 (8-hr)   | 805–1004 (24-hr)   | 1650–2049 (1-hr)   | 401–500      |                                |
-   * */
+*/
 
   const constRanges = {
     O3 : {
@@ -145,46 +159,53 @@ function calculateAQI(aqiData) {
   const converted = convert2ppm(values);
 
   // Set values and indexes
-
   let index;
-  let topCategory;
 
   for (let i=0; i<7; i++) {
-    if ( constRanges.O3.low[i] < values.O3 && values.O3 < constRanges.O3.high[i] ) {
-      pickedLowAndHigh.O3.low  = constRanges.O3.low[i];
-      pickedLowAndHigh.O3.high = constRanges.O3.high[i];
-      index = i;
-    }
+    /* [ pickedLowAndHigh.O3.low, pickedLowAndHigh.O3.high, index ] = compareHighAndLow(constRanges.O3, converted.O3, i);
+    [ pickedLowAndHigh.PM2_5.low, pickedLowAndHigh.PM2_5.high, index ] = compareHighAndLow(constRanges.PM2_5, converted.PM2_5, i);
+    [ pickedLowAndHigh.PM10.low, pickedLowAndHigh.PM10.high, index ] = compareHighAndLow(constRanges.PM10, converted.PM10, i);
+    [ pickedLowAndHigh.CO.low, pickedLowAndHigh.CO.high, index ] = compareHighAndLow(constRanges.CO, converted.C0, i);
+    [ pickedLowAndHigh.SO2.low, pickedLowAndHigh.SO2.high, index ] = compareHighAndLow(constRanges.SO2, converted.SO2, i);
+    [ pickedLowAndHigh.NO2.low, pickedLowAndHigh.NO2.high, index ] = compareHighAndLow(constRanges.NO2, converted.NO2, i);
+     */
+    // console.log(pickedLowAndHigh.O3.low, pickedLowAndHigh.O3.high, index);
 
-    if ( constRanges.PM2_5.low[i] < values.PM2_5 && values.PM2_5 < constRanges.PM2_5.high[i] ) {
-      pickedLowAndHigh.PM2_5.low  = constRanges.PM2_5.low[i];
-      pickedLowAndHigh.PM2_5.high = constRanges.PM2_5.high[i];
-      index = i;
-    }
+    // if ( constRanges.O3.low[i] < values.O3 && values.O3 < constRanges.O3.high[i] ) {
+    //   pickedLowAndHigh.O3.low  = constRanges.O3.low[i];
+    //   pickedLowAndHigh.O3.high = constRanges.O3.high[i];
+    //   index = i;
+    // }
 
-    if ( constRanges.PM10.low[i] < values.PM10 && values.PM10 < constRanges.PM10.high[i] ) {
-      pickedLowAndHigh.PM10.low  = constRanges.PM10.low[i];
-      pickedLowAndHigh.PM10.high = constRanges.PM10.high[i];
-      index = i;
-    }
+    // if ( constRanges.PM2_5.low[i] < values.PM2_5 && values.PM2_5 < constRanges.PM2_5.high[i] ) {
+    //   pickedLowAndHigh.PM2_5.low  = constRanges.PM2_5.low[i];
+    //   pickedLowAndHigh.PM2_5.high = constRanges.PM2_5.high[i];
+    //   index = i;
+    // }
 
-    if ( constRanges.CO.low[i] < values.CO && values.CO < constRanges.CO.high[i] ) {
-      pickedLowAndHigh.CO.low  = constRanges.CO.low[i];
-      pickedLowAndHigh.CO.high = constRanges.CO.high[i];
-      index = i;
-    }
+    // if ( constRanges.PM10.low[i] < values.PM10 && values.PM10 < constRanges.PM10.high[i] ) {
+    //   pickedLowAndHigh.PM10.low  = constRanges.PM10.low[i];
+    //   pickedLowAndHigh.PM10.high = constRanges.PM10.high[i];
+    //   index = i;
+    // }
 
-    if ( constRanges.SO2.low[i] < values.SO2 && values.SO2 < constRanges.SO2.high[i] ) {
-      pickedLowAndHigh.SO2.low  = constRanges.SO2.low[i];
-      pickedLowAndHigh.SO2.high = constRanges.SO2.high[i];
-      index = i;
-    }
+    // if ( constRanges.CO.low[i] < values.CO && values.CO < constRanges.CO.high[i] ) {
+    //   pickedLowAndHigh.CO.low  = constRanges.CO.low[i];
+    //   pickedLowAndHigh.CO.high = constRanges.CO.high[i];
+    //   index = i;
+    // }
 
-    if ( constRanges.NO2.low[i] < values.NO2 && values.NO2 < constRanges.NO2.high[i] ) {
-      pickedLowAndHigh.NO2.low  = constRanges.NO2.low[i];
-      pickedLowAndHigh.NO2.high = constRanges.NO2.high[i];
-      index = i;
-    }
+    // if ( constRanges.SO2.low[i] < values.SO2 && values.SO2 < constRanges.SO2.high[i] ) {
+    //   pickedLowAndHigh.SO2.low  = constRanges.SO2.low[i];
+    //   pickedLowAndHigh.SO2.high = constRanges.SO2.high[i];
+    //   index = i;
+    // }
+
+    // if ( constRanges.NO2.low[i] < values.NO2 && values.NO2 < constRanges.NO2.high[i] ) {
+    //   pickedLowAndHigh.NO2.low  = constRanges.NO2.low[i];
+    //   pickedLowAndHigh.NO2.high = constRanges.NO2.high[i];
+    //   index = i;
+    // }
   }
 
 
@@ -202,19 +223,19 @@ function calculateAQI(aqiData) {
   const resultIndexes= [];
   const diffAQI = (constRanges.AQI.high[index] - constRanges.AQI.low[index]);
 
-  resultIndexes[0] = (diffAQI * (values.O3 - pickedLowAndHigh.O3.low) / (pickedLowAndHigh.O3.high - pickedLowAndHigh.O3.low)) + constRanges.AQI.low[index];
-  resultIndexes[1] = (diffAQI * (values.PM2_5 - pickedLowAndHigh.PM2_5.low) / (pickedLowAndHigh.PM2_5.high - pickedLowAndHigh.PM2_5.low)) + constRanges.AQI.low[index];
-  resultIndexes[2] = (diffAQI * (values.PM10 - pickedLowAndHigh.PM10.low) / (pickedLowAndHigh.PM10.high - pickedLowAndHigh.PM10.low)) + constRanges.AQI.low[index];
-  resultIndexes[3] = (diffAQI * (values.CO  - pickedLowAndHigh.CO.low) / (pickedLowAndHigh.CO.high - pickedLowAndHigh.CO.low)) + constRanges.AQI.low[index];
-  resultIndexes[4] = (diffAQI * (values.SO2 - pickedLowAndHigh.SO2.low) / (pickedLowAndHigh.SO2.high - pickedLowAndHigh.SO2.low)) + constRanges.AQI.low[index];
-  resultIndexes[5] = (diffAQI * (values.NO2 - pickedLowAndHigh.NO2.low) / (pickedLowAndHigh.NO2.high - pickedLowAndHigh.NO2.low)) + constRanges.AQI.low[index];
+  // resultIndexes[0] = (diffAQI * (values.O3 - pickedLowAndHigh.O3.low) / (pickedLowAndHigh.O3.high - pickedLowAndHigh.O3.low)) + constRanges.AQI.low[index];
+  // resultIndexes[1] = (diffAQI * (values.PM2_5 - pickedLowAndHigh.PM2_5.low) / (pickedLowAndHigh.PM2_5.high - pickedLowAndHigh.PM2_5.low)) + constRanges.AQI.low[index];
+  // resultIndexes[2] = (diffAQI * (values.PM10 - pickedLowAndHigh.PM10.low) / (pickedLowAndHigh.PM10.high - pickedLowAndHigh.PM10.low)) + constRanges.AQI.low[index];
+  // resultIndexes[3] = (diffAQI * (values.CO  - pickedLowAndHigh.CO.low) / (pickedLowAndHigh.CO.high - pickedLowAndHigh.CO.low)) + constRanges.AQI.low[index];
+  // resultIndexes[4] = (diffAQI * (values.SO2 - pickedLowAndHigh.SO2.low) / (pickedLowAndHigh.SO2.high - pickedLowAndHigh.SO2.low)) + constRanges.AQI.low[index];
+  // resultIndexes[5] = (diffAQI * (values.NO2 - pickedLowAndHigh.NO2.low) / (pickedLowAndHigh.NO2.high - pickedLowAndHigh.NO2.low)) + constRanges.AQI.low[index];
 
-  const pickedAQI = Math.max(resultIndexes);
+  // const pickedAQI = Math.max(resultIndexes);
 
-  console.table(pickedLowAndHigh);
-  console.table(values);
-  console.log(resultIndexes);
-  console.log(pickedAQI);
+  // console.table(pickedLowAndHigh);
+  // console.table(values);
+  // console.log(resultIndexes);
+  // console.log(pickedAQI);
 }
 
 function changeAQI(aqiData){
@@ -222,7 +243,7 @@ function changeAQI(aqiData){
 
   if ( aqiDiv == null ){
     /* Issue of loading script before HTML is fixed by using "defer" */
-    console.log("no AQI block");
+    console.error("no AQI block");
     return;
   }
 
@@ -243,7 +264,7 @@ function changePressure(newPressure){
 
   if ( pressDiv == null ){
     /* Issue of loading script before HTML is fixed by using "defer" */
-    console.log("no pressure block");
+    console.error("no pressure block");
     return;
   }
 
@@ -253,7 +274,7 @@ function changePressure(newPressure){
 function updateWeatherImage(code){
   for (let i=0; i < weatherStates.length; i++) {
     if ( weatherStates[i].code === code ) {
-      console.log(weatherStates[i]);
+      // console.log(weatherStates[i]);
       loadImg(weatherStates[i].icon);
     }
   }

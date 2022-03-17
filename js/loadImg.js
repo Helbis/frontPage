@@ -7,14 +7,9 @@ function loadImg( icon ){
 
   if (currentTime > 18 && currentTime < 5) {
     time = "night";
-    console.log(currentTime);
   } else {
     time = "day";
   }
 
-  let loadStr = `images/weather/64x64/${time}/${icon}.png`;
-  console.log("try to load");
-  console.log(loadStr);
-
-  imgDiv.src = loadStr;
+  imgDiv.src = `images/weather/64x64/${time}/${icon}.png`;
 }

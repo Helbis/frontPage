@@ -1,5 +1,5 @@
 const weatherStates = JSON.parse(data);
-console.log(weatherStates);
+// console.log(weatherStates);
 
 const aqiColors = [
   [50, "green"],
@@ -18,7 +18,7 @@ request.responseType = "json";
 request.send();
 
 request.onload = () => {
-  console.log(request.response.current);
+  // console.log(request.response.current);
 
   changeAQI();
   changeTemp(request.response.current.temp_c);
